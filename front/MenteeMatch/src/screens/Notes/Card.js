@@ -108,6 +108,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 15,
     display: 'flex',
+    borderWidth: 4,
+    borderColor: "#20232a",
   },
 
   title: {
