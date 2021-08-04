@@ -29,11 +29,13 @@ export default function CardComponent({ mentee, functions, userToken, notes }) {
           }}>{`${mentee.name} ${mentee.surname}`}</Card.Title>
 
         <Input
+          style={{color: mode.text}}
           placeholder="Titulo..."
           leftIcon={<Icon name="edit" size={20} color="black" />}
           onChangeText={settitle}
         />
         <Input
+          style={{color: mode.text}}
           placeholder="Nota..."
           leftIcon={<Icon name="edit" size={20} color="black" />}
           onChangeText={setnote}

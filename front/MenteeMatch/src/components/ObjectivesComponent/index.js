@@ -49,16 +49,22 @@ const Item = ({
 
           {/* INPUT MODAL */}
 
-          <Dialog.Container visible={showModal}>
-            <Dialog.Title>Edita tu objetivo!</Dialog.Title>
-
+          <Dialog.Container visible={showModal} contentStyle={{backgroundColor: mode.bg}}>
+            <Dialog.Title style={{color: mode.text}}>Edita tu objetivo!</Dialog.Title>
+          
+          <Text style={{color: mode.text, paddingLeft: 12, fontSize: 16, position: "relative", top: 20}}>Completo</Text>
             <Dialog.Switch
-              label="Completo"
+              /* label="Completo" */
+              thumbColor={mode.green}
+              trackColor={{false: mode.text, true: mode.text}}
               value={newState}
               onValueChange={() => setnewstate(!newState)}></Dialog.Switch>
 
+
+            <Text style={{color: mode.text, paddingLeft: 10}}>Objetivo</Text>
             <Dialog.Input
-              label="Objetivo"
+              /* label="Objetivo" */
+              style={{color: mode.text}}
               value={description}
               onChangeText={setdescription}></Dialog.Input>
 
@@ -124,8 +130,8 @@ const ObjectivesComponent = ({
   );
 
   return (
-    <ScrollView>
-      <View style={{ ...styles.container, backgroundColor: mode.bg }}>
+    <ScrollView style={{backgroundColor: mode.bg }}>
+      <View style={styles.container}>
         <View style={styles.add_objectives}>
           <InputText
             onChangeText={setinput}

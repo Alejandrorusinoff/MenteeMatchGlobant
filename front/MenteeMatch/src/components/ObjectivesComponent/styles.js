@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
   content: {
     flex: 6.5,
-    height: 392,
+    /* height: 392, */
     padding: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,

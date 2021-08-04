@@ -55,7 +55,7 @@ const Notes = ({ route }) => {
     }
   };
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Card
         mentee={mentee}
         notes={notes}

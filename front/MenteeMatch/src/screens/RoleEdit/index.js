@@ -13,6 +13,7 @@ import { storeData } from '../../utils/storage';
 export default function RoleEdit({ navigation }) {
     const { mode } = useMode()
     const user = useSelector(state => state.user);
+    const { theme } = useSelector(state => state);
     //const [ menteeBox, setMenteeBox] = React.useState(user.isMentee);
     //const [ mentorBox, setMentorBox] = React.useState(user.isMentor);
     const [ role, setRole ] = React.useState('');
@@ -100,10 +101,10 @@ export default function RoleEdit({ navigation }) {
                             data={user.skillsToLearn}
                             keyExtractor={skills => skills._id}
                             renderItem={({ item }) => (
-                                <TouchableOpacity disabled={true} style={styles.skillButton}
+                                <TouchableOpacity disabled={true} style={{...styles.skillButton}}
                                 >
                                     <LinearGradient
-                                        colors={['#25F198', '#15C9C3']}
+                                        colors={theme === 'ligth' ? ['#25F198', '#15C9C3'] : [ "#CCC", mode.bg ]}
                                         useAngle={true} angle={40} angleCenter={{x:0.5,y:0.5}}
                                         style={styles.gradient}
                                     >
@@ -163,7 +164,7 @@ export default function RoleEdit({ navigation }) {
                                 <TouchableOpacity disabled={true} style={styles.skillButton}
                                 >
                                     <LinearGradient
-                                        colors={['#25F198', '#15C9C3']}
+                                        colors={theme === 'ligth' ? ['#25F198', '#15C9C3'] : [ "#CCC", mode.bg ]}
                                         useAngle={true} angle={40} angleCenter={{x:0.5,y:0.5}}
                                         style={styles.gradient}
                                     >
