@@ -78,8 +78,8 @@ const updateMeet = async ({data, token}) => {
 const deleteMeet = async ({_id, token}) => {
   try {
     const axiosAuthorized = generateAxios(token)
-    const res = axiosAuthorized.delete(`${API_URL}/api/users/meets/${_id}`)
-    return res.data
+    const res = await axiosAuthorized.delete(`${API_URL}/api/users/meets/${_id}`)
+    return {...res.data, token}
   } catch(err) { console.log(err) }
 }
 

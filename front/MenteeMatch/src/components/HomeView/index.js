@@ -126,7 +126,7 @@ export default () => {
           Reuniones programadas
         </Text>
       </TouchableOpacity>
-      {false ? (
+      {user.meets.length ? (
         <View
           style={{
             ...styles.flatContainer,
@@ -142,7 +142,7 @@ export default () => {
             numColumns={1}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
-            data={objectives}
+            data={user.meets}
             keyExtractor={objectives => objectives._id}
             renderItem={({ item }) => (
               <View style={styles.flatContent}>
@@ -151,10 +151,10 @@ export default () => {
                   size={25}
                   disableBuiltInState={true}
                   isChecked={item.state === 'En progreso' ? false : true}
-                  text={item.description}
+                  text={`${item.title} - ${item.date.substring(0,15)}`}
                   fillColor="#BFD732"
                   iconStyle={{ borderColor: '#BFD732' }}
-                  textStyle={{ fontSize: 20, color: mode.text }}
+                  textStyle={{ fontSize: 20, color: mode.text, textDecorationLine: 'none'}}
                 />
               </View>
             )}

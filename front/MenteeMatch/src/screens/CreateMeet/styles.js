@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         padding: -2,
       },
     notContainer:{
+        flex: 1,
         alignItems: 'center'
     },
     not: {

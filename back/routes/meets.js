@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const { Meets, Users } = require('../db/models')
-const { checkIfMentor } = require("../middlewares/checkIfMentor")
+const { checkIfMentor } = require("../middlewares/checkIfMentor");
+const { findUserById } = require("../services/usersServices");
 
 router.get('/', async (req, res, next) => {
     try {
         const { id } = req.user
         const user = await Users.findById(id).exec()
         if(!user) res.status(400).send('Bad request: no user found')
-        const meets = await Meets.find({ participants: user })
+        const meets = await Meets.find({ participants: user }).populate("meets")
         if(!meets) res.status(404).json({})
         res.status(200).json(meets)
     } catch(err) { next(err) }
@@ -46,7 +47,8 @@ router.delete('/:_id', async (req, res, next) => {
         await Promise.all(participants.map(p => 
             Users.findOneAndUpdate( { _id: p } , { $pull: { meets: _id } }, { new: true })))
         await meet.delete()
-        res.status(201).send('Meet deleted')
+        const user = await findUserById(req.user.id)
+        res.status(200).send(user)
     } catch(err) { next(err) }
 })
 

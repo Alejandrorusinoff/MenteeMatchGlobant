@@ -8,6 +8,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import styles from './styles';
 import useMode from '../../hooks/useMode';
 import { pushMeet } from '../../redux/Reducers/UserReducer';
+import { sendNotification } from '../../services/axiosServices';
 
 const CreateMeet = ({ navigation }) => {
   const { mode } = useMode();
@@ -49,6 +50,13 @@ const CreateMeet = ({ navigation }) => {
       datas.date = date.toString();
       await dispatch(pushMeet({ data: datas, token: user.token }));
       // console.log('Presionaste Crear reunión. Data ---> ', datas);
+      sendNotification(
+        {
+          receptor: participant,
+          type: 'reunion',
+        },
+        user.token,
+      )
       navigation.navigate('Meets');
     } catch (err) {
       console.log(err);
@@ -97,13 +105,9 @@ const CreateMeet = ({ navigation }) => {
             />
           )}
         />
-        {errors.participant && <Text style={{...styles.error, paddingLeft: 30, paddingBottom: 5}}>Elige un participante</Text>}
         <Controller
           control={control}
-          name="participant"
           defaultValue=""
-          rules={{ required: 'Campo requerido' }}
-          name="participant"
           render={() => (
             <DropDownPicker
               style={{ ...styles.dropDown, backgroundColor: mode.bg, color: mode.text }}
@@ -147,3 +151,4 @@ const CreateMeet = ({ navigation }) => {
 };
 
 export default CreateMeet;
+

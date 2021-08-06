@@ -71,7 +71,7 @@ export default function HomeStack({ navigation }) {
         name="Objectives"
         component={Objectives}
         options={{
-          title: 'Objectives',
+          title: 'Objetivos',
         }}
       />
       <Stack.Screen
@@ -85,7 +85,7 @@ export default function HomeStack({ navigation }) {
         name="Meets"
         component={Meets}
         options={{
-          title: 'Meets',
+          title: 'Reuniones',
         }}
       />
     </Stack.Navigator>

@@ -5,6 +5,7 @@ import {
   postObjectivesToUser,
   deleteObjectivesToUser,
   updateObjectivesToUser,
+  sendNotification,
 } from '../../services/axiosServices';
 import { useSelector } from 'react-redux';
 import { simpleMessage } from '../../utils';
@@ -28,13 +29,19 @@ const Objectives = ({ route }) => {
 
   const handleAdd = async objective => {
     const res = await postObjectivesToUser(mentee._id, userToken, objective);
-
     if (res) {
       simpleMessage(
         'Objetivo agregado',
         'El objetivo fue agregado correctamente',
         'success',
       );
+      sendNotification(
+        {
+          receptor: mentee._id,
+          type: 'objective',
+        },
+        userToken,
+      )
       setstate(!state);
     }
   };

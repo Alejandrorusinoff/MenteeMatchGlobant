@@ -11,7 +11,7 @@ import {
   getMeets,
   createMeet,
   updateMeet,
-  deleteMeet
+  deleteMeet,
 } from '../../services/reduxServices';
 
 import { deleteMatch, deleteMatchMentor } from '../../services/axiosServices';
@@ -105,7 +105,6 @@ export const pushMeet = createAsyncThunk('PUSH_MEET', createMeet);
 export const reloadMeet = createAsyncThunk('RELOAD_MEET', updateMeet);
 export const removeMeet = createAsyncThunk('REMOVE_MEET', deleteMeet);
 
-
 const userReducer = createReducer(initialState, {
   [getUser.fulfilled]: (_, action) => action.payload,
   [setUser]: (_, action) => action.payload,
@@ -115,10 +114,13 @@ const userReducer = createReducer(initialState, {
   [cancelMatchMentor.fulfilled]: (state, _) => state,
   [deleteNotification.fulfilled]: (_, action) => action.payload,
   [pullMeets.fulfilled]: (state, action) => {state.meets = action.payload},
-  [pushMeet.fulfilled]: (state, action) => {state.meets = [...state.meets, action.payload]},
+  [pushMeet.fulfilled]: (state, action) => 
+  {state.meets = [...state.meets, action.payload]},
   [reloadMeet.fulfilled]: (state, action) => state,
   [removeMeet.fulfilled]: (state, action) => 
-    {state.meets = state.meets.filter(meet => meet._id !== action.meta.arg._id)}
+    {state.meets = state.meets.filter(meet => meet._id !== action.meta.arg._id)
+    state.mentees.forEach(mentee => mentee.meets = mentee.meets.filter(meet => meet._id !== action.meta.arg._id))
+    }
 });
 
 export default userReducer;

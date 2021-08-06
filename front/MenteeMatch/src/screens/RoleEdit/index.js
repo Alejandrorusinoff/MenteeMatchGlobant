@@ -171,7 +171,7 @@ export default function RoleEdit({ navigation }) {
         </>
       ) : (
         <View style={styles.flex_1}>
-          <Text>Todavia no sos Mentee</Text>
+          <Text style={{color: mode.text}}>Todavia no sos Mentee</Text>
         </View>
       )}
       <View style={styles.header}>
@@ -254,7 +254,7 @@ export default function RoleEdit({ navigation }) {
         </>
       ) : (
         <View style={styles.flex_1}>
-          <Text>Todavia no sos Mentor</Text>
+          <Text style={{color: mode.text}}>Todavia no sos Mentor</Text>
         </View>
       )}
       {user.isMentor && user.isMentee ? null : (

@@ -7,23 +7,35 @@ import useMode from '../../hooks/useMode';
 import styles from './styles';
 
 const Meets = ({ navigation, route }) => {
+
+  const arrCompare = (arr1, arr2) => {
+    let j=0
+    for(let i=j; i<arr1.length ; i++){
+      if(arr1[i]._id === arr2[j]._id) j++
+    }
+    if(j>0) return true
+  }
+
   const { mode } = useMode();
   const dispatch = useDispatch();
-  const mentee = route.params && route.params.mentee;
+  console.log("route", route)
+  const user = useSelector(state => state.user)
+  const userMeets = user.meets
+  let mentee = route.params && route.params.mentee
+  let { meets } = mentee && mentee.meets.length ? mentee : user
+  if(!user.meets.length || (route.params.mentee && arrCompare(route.params.mentee.meets, userMeets))){
+    meets = user.meets
+  }
   const token = useSelector(state => state.user.token);
-  const { meets } = mentee && mentee.meets.length ? mentee : useSelector(state => state.user);
 
   const handleDelete = async meet => {
-    const data = { _id: meet._id, token: token };
-     dispatch(removeMeet(data)).then((deleted) => {
-       console.log(deleted)
-       dispatch(pullMeets(token))
-     })
+      const data = { _id: meet._id, token: token };
+     await dispatch(removeMeet(data)).then(()=> dispatch(pullMeets(token)))
   };
 
   useEffect(() => {
     dispatch(pullMeets(token));
-  }, []);
+  }, [dispatch, meets.length]);
 
   return (
     <View style={{ ...styles.container, backgroundColor: mode.bg }}>
@@ -37,7 +49,7 @@ const Meets = ({ navigation, route }) => {
               <Text style={{...styles.description, color: mode.text}}>{meet.description}</Text>
               <Text style={{...styles.date, color: mode.text}}>{meet.date}</Text>
               <Button
-                style={{...styles.deleteBtn, backgroundColor: mode.btn}}
+                style={{...styles.deleteBtn, backgroundColor: '#f44336'}}
                 title="Eliminar"
                 pressFunction={() => handleDelete(meet)}
               />

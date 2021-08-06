@@ -52,7 +52,13 @@ const cancelMentor = (mentorId, menteeId) => {
       },
     })
     .populate("objectives")
-    .populate("mentees")
+    .populate({
+      path: "mentees",
+      populate: {
+        path: "meets",
+        model: "Meets",
+      },
+    })
     .populate("meets")
     .exec()
 }
@@ -102,7 +108,13 @@ const cancelMentee = (mentorId, menteeId) => {
       },
     })
     .populate("objectives")
-    .populate("mentees")
+    .populate({
+      path: "mentees",
+      populate: {
+        path: "meets",
+        model: "Meets",
+      },
+    })
     .populate("meets")
     .exec()
 }
@@ -154,6 +166,13 @@ const findUserByEmail = email => {
         path: "skillsToLearn",
         model: "Skills"
       }
+    })
+    .populate({
+      path: "mentees",
+      populate: {
+        path: "meets",
+        model: "Meets",
+      },
     })
     .populate("notes")
     .populate("objectives")
@@ -209,6 +228,13 @@ const findUserById = _id => {
       }
     })
     .populate({
+      path: "mentees",
+      populate: {
+        path: "meets",
+        model: "Meets",
+      },
+    })
+    .populate({
       path: "notifications",
       populate: {
         path: "emisor",
@@ -260,6 +286,13 @@ const updateById = (_id, body) => {
         path: "skillsToLearn",
         model: "Skills"
       }
+    })
+    .populate({
+      path: "mentees",
+      populate: {
+        path: "meets",
+        model: "Meets",
+      },
     })
     .populate({
       path: "mentor",

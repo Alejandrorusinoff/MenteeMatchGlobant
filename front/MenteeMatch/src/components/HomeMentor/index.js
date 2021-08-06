@@ -23,6 +23,7 @@ import { styles } from './styles';
 export default () => {
   const { mode } = useMode();
   let user = useSelector(state => state.user);
+  /* console.log("User Mentees en HomeMentor: ", user.mentees) */
   const navigation = useNavigation();
   const dispatch = useDispatch();
 

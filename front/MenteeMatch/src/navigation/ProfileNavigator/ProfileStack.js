@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { UserDetails } from '../../screens';
+import { Meets, UserDetails } from '../../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Camera } from '../../components';
 import { StyleSheet } from 'react-native';
@@ -39,6 +39,11 @@ export default function ProfileStack({ navigation }) {
         name="Camera"
         component={Camera}
         options={{ title: 'Camara' }}
+      />
+      <Stack.Screen
+        name="Meets"
+        component={Meets}
+        options={{ title: 'Reuniones' }}
       />
     </Stack.Navigator>
   );

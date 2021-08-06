@@ -30,6 +30,8 @@ const Information = ({ item }) => {
       return `¡Felicitaciones!. Has seleccionado a ${emisor.name} ${emisor.surname} cómo tu mentor`;
     } else if (item.type === 'reunion') {
       return `Tu mentor ${emisor.name} ${emisor.surname} ha creado una nueva reunión`;
+    } else if (item.type === 'objective') {
+      return `Tu mentor ${emisor.name} ${emisor.surname} te ha asignado un nuevo objetivo`;
     } 
   };
   return (

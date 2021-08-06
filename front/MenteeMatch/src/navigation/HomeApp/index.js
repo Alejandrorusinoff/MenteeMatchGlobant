@@ -42,6 +42,7 @@ export default function HomeApp() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
+          unmountOnBlur: true,
         }}
       />
       <Tab.Screen

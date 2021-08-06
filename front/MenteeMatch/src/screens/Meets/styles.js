@@ -31,7 +31,9 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         padding: 10,
         elevation: 12,
-        backgroundColor: globantBright.bg
+        backgroundColor: globantBright.bg,
+        marginHorizontal: 10,
+        width: 330
     },
     meetTitle: {
         fontSize: 19,
@@ -48,8 +50,8 @@ const styles = StyleSheet.create({
         color: 'gray'
     },
     new: {
-        marginTop: 60,
-        width: '70%'
+        marginTop: 40,
+        width: '60%'
     },
     deleteBtn: {
         borderWidth: 1,
