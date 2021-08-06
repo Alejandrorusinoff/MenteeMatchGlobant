@@ -2,7 +2,6 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { RoleEdit, Skills } from '../../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import useMode from '../../hooks/useMode';
 
 const Stack = createStackNavigator();
 
@@ -22,7 +21,7 @@ export default function RoleStack({ navigation }) {
         name="Role"
         component={RoleEdit}
         options={{
-          title: 'Opciones de Matcher',
+          title: 'Cambio de rol',
           headerLeft: () => (
             <Ionicons
               name="menu"
@@ -37,7 +36,7 @@ export default function RoleStack({ navigation }) {
         name="Skills"
         component={Skills}
         options={{
-          title: 'Habilidades',
+          title: 'Cambio de skills',
         }}
       />
     </Stack.Navigator>

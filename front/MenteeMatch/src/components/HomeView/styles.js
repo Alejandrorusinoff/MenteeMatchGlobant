@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 62.5,
     borderWidth: 3,
-    borderColor: globantBright.violet,
+    borderColor: '#00A99D',
   },
 
   text: {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   textName: {
     fontSize: 25,
     margin: 5,
-    color: globantBright.violet,
+    color: '#00A99D',
   },
 });
 

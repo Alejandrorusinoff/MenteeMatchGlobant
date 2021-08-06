@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileEdit } from '../../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Camera } from '../../components';
+import { StyleSheet } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +29,7 @@ export default function ProfileEditStack({ navigation }) {
               name="settings"
               size={30}
               color={'#F5F6F7'}
-              style={{ marginRight: 15 }}
+              style={styles.margin}
               onPress={() => navigation.openDrawer()}
             />
           ),
@@ -43,3 +44,6 @@ export default function ProfileEditStack({ navigation }) {
   );
 }
 
+const styles = StyleSheet.create({
+  margin: { marginRight: 15 },
+});

@@ -29,25 +29,24 @@ export default function MenteeDetails({ route }) {
   return (
     <SafeAreaView style={{ ...styles.container, backgroundColor: mode.bg }}>
       <View style={styles.user_data_container}>
-        {/* <Image source={{ uri: mentee.img ? mentee.img : userImage }} style={styles.foto} /> */}
+        <Image source={mentee.img ? { uri: mentee.img } : userImage} style={styles.foto} />
         <TouchableOpacity
           disabled={true}
           style={{
             flexDirection: 'row',
             alignItems: 'center',
           }}>
-          <FontAwesome name="user" color={globantBright.violet} size={25} />
+          <FontAwesome name="user" color={'#00A99D'} size={25} />
           <Text style={styles.textName}>
             {`${mentee.name} ${mentee.surname}`}
           </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.touchButton}>
+      <TouchableOpacity disabled style={styles.touchButton}>
         <FontAwesome name="rocket" color={'#BFD732'} size={25} />
         <Text style={{ fontSize: 20, margin: 5, color: mode.text }}>
           Objetivos
         </Text>
-        <FontAwesome name="edit" color={'#BFD732'} size={25} />
       </TouchableOpacity>
       {objectives.length ? (
         <View
@@ -88,12 +87,11 @@ export default function MenteeDetails({ route }) {
           <Text style={{ color: mode.text }}>Sin objetivos!</Text>
         </View>
       )}
-      <TouchableOpacity style={styles.touchButton}>
+      <TouchableOpacity disabled style={styles.touchButton}>
         <FontAwesome name="comments" color={'#BFD732'} size={25} />
         <Text style={{ fontSize: 20, margin: 5, color: mode.text }}>
           Reuniones programadas
         </Text>
-        <FontAwesome name="edit" color={'#BFD732'} size={25} />
       </TouchableOpacity>
       {!objectives.length ? (
         <View

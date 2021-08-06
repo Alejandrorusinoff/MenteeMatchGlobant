@@ -11,8 +11,11 @@ import { InputText, Button } from '../../components';
 import { storeData } from '../../utils/storage';
 import { login } from '../../redux/Slices/authSlice';
 import useMode from '../../hooks/useMode';
+import { API_URL } from '@env';
+
 
 const Login = ({ navigation }) => {
+  /* console.log({api: API_URL}) */
   const { mode } = useMode();
   const {
     control,

@@ -68,7 +68,7 @@ export default () => {
             flexDirection: 'row',
             alignItems: 'center',
           }}>
-          <FontAwesome name="user" color={globantBright.violet} size={25} />
+          <FontAwesome name="user" color={'#00A99D'} size={25} />
           <Text style={styles.textName}>
             {`${mentor.name} ${mentor.surname}`}
           </Text>
@@ -101,13 +101,14 @@ export default () => {
             renderItem={({ item }) => (
               <View style={styles.flatContent}>
                 <BouncyCheckbox
+                  disabled
                   size={25}
                   disableBuiltInState={true}
                   isChecked={item.state === 'En progreso' ? false : true}
                   text={item.description}
                   fillColor="#BFD732"
                   iconStyle={{ borderColor: '#BFD732' }}
-                  textStyle={{ fontSize: 20, color: mode.text }}
+                  textStyle={{ fontSize: 20, color: mode.text, textDecorationLine: 'none',}}
                 />
               </View>
             )}
@@ -146,6 +147,7 @@ export default () => {
             renderItem={({ item }) => (
               <View style={styles.flatContent}>
                 <BouncyCheckbox
+                  disabled
                   size={25}
                   disableBuiltInState={true}
                   isChecked={item.state === 'En progreso' ? false : true}

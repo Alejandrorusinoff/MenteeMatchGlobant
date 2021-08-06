@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 export default function Camera({ route, navigation }) {
   const [{ cameraRef }, { takePicture }] = useCamera(null);
   const [imgCache, setImgCache] = React.useState('');
+  const [typeCamera, setTypeCamera] = React.useState(false);
 
   React.useEffect(() => {}, [imgCache]);
 
@@ -43,7 +44,8 @@ export default function Camera({ route, navigation }) {
           ref={cameraRef}
           captureAudio={false}
           style={styles.preview}
-          type={RNCamera.Constants.Type.back}>
+          type={typeCamera ? RNCamera.Constants.Type.back: RNCamera.Constants.Type.front}>
+          <View style={{ flexDirection:'row', paddingLeft: 130 }}>
           <TouchableOpacity style={styles.capture}>
             <Ionicons
               name="camera"
@@ -52,6 +54,15 @@ export default function Camera({ route, navigation }) {
               onPress={() => takePhoto()}
             />
           </TouchableOpacity>
+          <TouchableOpacity style={styles.capture}>
+            <Ionicons
+              name="camera-reverse"
+              size={50}
+              color={'#FFFFFF'}
+              onPress={() => setTypeCamera(!typeCamera)}
+            />
+          </TouchableOpacity>
+        </View>
         </RNCamera>
       )}
     </View>

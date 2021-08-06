@@ -4,6 +4,8 @@ import CustomDrawerContent from './CustomDrawerContent';
 import ProfileStack from './ProfileStack';
 import useMode from '../../hooks/useMode';
 import ProfileEditStack from './ProfileEditStack.js';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 const Drawer = createDrawerNavigator();
 
 export default function ProfileNavigator() {
@@ -14,6 +16,10 @@ export default function ProfileNavigator() {
       initialRouteName="Perfil"
       drawerStyle={{
         backgroundColor: mode.bg,
+        width: "60%",
+        alignItems: "flex-start",
+        flexDirection: "row",
+        justifyContent: "center"
       }}
       drawerContent={props => <CustomDrawerContent {...props} />}
       drawerContentOptions={{ activeTintColor: '#BFD732' }}
@@ -22,12 +28,12 @@ export default function ProfileNavigator() {
       <Drawer.Screen
         name="Perfil"
         component={ProfileStack}
-        options={{ title: 'Mi Perfil' }}
+        options={{ title: 'Mi Perfil', drawerIcon: () => <Ionicons name="person" size={24} />  }}
       />
       <Drawer.Screen
         name="ProfileEdit"
         component={ProfileEditStack}
-        options={{ title: 'Editar perfil' }}
+        options={{ title: 'Editar perfil', drawerIcon: () => <Ionicons name="create" size={24} />}}
       />
     </Drawer.Navigator>
   );

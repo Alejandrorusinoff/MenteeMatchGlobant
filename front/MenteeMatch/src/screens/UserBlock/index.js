@@ -9,6 +9,8 @@ import useMode from '../../hooks/useMode';
 import useAlert from '../../hooks/useAlert';
 import { simpleMessage } from '../../utils';
 import { ToolTipModal } from '../../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { setEnableInctructions } from '../../redux/Reducers/instructionsReducer';
 
 export default function UserBlock({
   user,
@@ -18,6 +20,7 @@ export default function UserBlock({
   handleDislike,
   disableButtons,
 }) {
+  const dispatch = useDispatch();
   const getIsMentor = () => {
     if (userLogin.actualRole) {
       return userLogin.actualRole === 'Mentor';
@@ -28,6 +31,7 @@ export default function UserBlock({
   const skills = isMentor ? user.skillsToLearn : user.skillsToTeach;
   const [show, setShow] = useState(false);
   const [tooltipShow, tooltipClose, tooltipOpen] = useAlert();
+  const { enableInstructions } = useSelector(state => state);
 
   const getPopMessage = () => {
     return user.isMentor
@@ -62,8 +66,9 @@ export default function UserBlock({
   };
 
   useEffect(() => {
-    if (enableTooltip) {
+    if (enableTooltip && enableInstructions) {
       tooltipOpen();
+      dispatch(setEnableInctructions());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enableTooltip]);

@@ -53,6 +53,7 @@ const cancelMentor = (mentorId, menteeId) => {
     })
     .populate("objectives")
     .populate("mentees")
+    .populate("meets")
     .exec()
 }
 
@@ -102,6 +103,7 @@ const cancelMentee = (mentorId, menteeId) => {
     })
     .populate("objectives")
     .populate("mentees")
+    .populate("meets")
     .exec()
 }
 
@@ -155,6 +157,7 @@ const findUserByEmail = email => {
     })
     .populate("notes")
     .populate("objectives")
+    .populate("meets")
     .exec()
 }
 
@@ -214,6 +217,7 @@ const findUserById = _id => {
     })
     .populate("notes")
     .populate("objectives")
+    .populate("meets")
     .exec()
 }
 
@@ -273,6 +277,7 @@ const updateById = (_id, body) => {
     })
     .populate("notes")
     .populate("objectives")
+    .populate("meets")
     .exec()
 }
 

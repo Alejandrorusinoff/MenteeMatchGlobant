@@ -126,7 +126,7 @@ const UserDetails = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={{ ...styles.userInfo, backgroundColor: mode.green }}>
+        <View style={{ ...styles.userInfo, backgroundColor: mode.inputBg }}>
           <Text style={{ ...styles.keyText, color: mode.text }}>
             Nombre: {`${name} ${surname}`}
           </Text>

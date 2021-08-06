@@ -7,7 +7,7 @@ const setSelectedUser = createAction('SET_SELECTED_USER');
 const selectedUserReducer = createReducer(
   {},
   {
-    [setSelectedUser]: (state, action) => action.payload,
+    [setSelectedUser]: (_, action) => action.payload,
   },
 );
 

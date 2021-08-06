@@ -11,7 +11,7 @@ const useTheme = () => {
 
   useEffect(() => {
     setHookTheme(previousState => (isEnabled ? 'dark' : 'ligth'));
-  }, [isEnabled]);
+  }, [isEnabled, theme]);
 
   useEffect(() => {
     storeData('menteeTheme', hookTheme).then(() =>

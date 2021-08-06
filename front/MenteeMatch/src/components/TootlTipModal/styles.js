@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: 50,
     width: 50,
+    backgroundColor: '#39B54A',
   },
   text: {
     color: 'white',
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     borderRadius: 10,
     width: '70%',
+    backgroundColor: '#20252C',
   },
   msgContainer: {
     flex: 1,
@@ -53,6 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent',
+    borderLeftColor: '#20252C',
   },
 });
 

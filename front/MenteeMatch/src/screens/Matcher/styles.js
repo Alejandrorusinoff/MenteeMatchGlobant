@@ -22,8 +22,6 @@ const styles = StyleSheet.create({
 
   subContainer_1: {
     flex: 3.8,
-    // backgroundColor: 'red',
-    // paddingBottom: 10,
   },
   optionsTxt: {
     textAlign: 'center',
@@ -31,8 +29,6 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     flex: 5.25,
-    // backgroundColor: 'green',
-    // paddingBottom: 10,
   },
 
   lastText: {
@@ -76,6 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  fakeHeight: { height: 120 },
 });
 
 export default styles;

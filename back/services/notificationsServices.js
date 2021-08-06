@@ -70,6 +70,7 @@ const pullFromReceptor = (_id, notificationId) => {
       },
     })
     .populate("objectives")
+    .populate("meets")
     .exec();
 };
 

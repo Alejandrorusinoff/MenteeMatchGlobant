@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Card from './Card';
 import { useSelector } from 'react-redux';
 
@@ -24,10 +24,11 @@ const Notes = ({ route }) => {
       setnotes(res.data);
     };
     get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newData]);
 
-  const handleAdd = async (userToken, menteeId, data) => {
-    const res = await postNote(userToken, menteeId, data);
+  const handleAdd = async (userTokenP, menteeId, data) => {
+    const res = await postNote(userTokenP, menteeId, data);
     if (res) {
       simpleMessage(
         'Nota agregado',
@@ -40,7 +41,9 @@ const Notes = ({ route }) => {
 
   const handleDelete = async noteId => {
     const res = await deleteNote(userToken, noteId);
-    if (res) setNewData(!newData);
+    if (res) {
+      setNewData(!newData);
+    }
   };
 
   const handleEdit = async (noteId, title, description) => {
@@ -55,7 +58,7 @@ const Notes = ({ route }) => {
     }
   };
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.flex}>
       <Card
         mentee={mentee}
         notes={notes}
@@ -65,5 +68,9 @@ const Notes = ({ route }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  flex: { flex: 1 },
+});
 
 export default Notes;

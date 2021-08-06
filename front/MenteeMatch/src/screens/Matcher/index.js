@@ -6,6 +6,7 @@ import { getMatches, setMatches } from '../../redux/Reducers/matchesReducer';
 import { updateUser } from '../../redux/Reducers/UserReducer';
 import { simpleMessage } from '../../utils';
 import { Button } from '../../components';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
 import useMode from '../../hooks/useMode';
@@ -18,6 +19,7 @@ export default function Matcher() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const matches = useSelector(state => state.matches);
+  const theme = useSelector(state => state.theme);
   const getRoleToFind = () => {
     if (!user.actualRole) {
       return user.isMentor ? 'mentees' : 'mentors';
@@ -36,11 +38,13 @@ export default function Matcher() {
     if (!matches.length) {
       dispatch(getMatches({ roleToFind, token: user.token }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     dispatch(getMatches({ roleToFind, token: user.token }));
-  }, [user.actualRole]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.actualRole, user.skillsToLearn, user.skillsToTeach]);
 
   const handleLike = likedUser => {
     const finalMatch = user[likedRole].find(
@@ -92,7 +96,7 @@ export default function Matcher() {
             }),
           );
         });
-      } else if(roleToFind === 'mentors') {
+      } else if (roleToFind === 'mentors') {
         return setMenteeToMentor(user._id, finalMatch._id, user.token).then(
           setted => {
             if (!setted) {
@@ -130,8 +134,10 @@ export default function Matcher() {
           },
         );
       }
-    } else if(!finalMatch) {
-      const orderedMatches = matches.filter(match => match._id !== likedUser._id);
+    } else if (!finalMatch) {
+      const orderedMatches = matches.filter(
+        match => match._id !== likedUser._id,
+      );
       dispatch(
         updateUser({
           url,
@@ -183,6 +189,58 @@ export default function Matcher() {
 
   return (
     <>
+      {user[likedRole].length > 1 && (
+        <>
+          <Ionicons
+            name="chevron-back"
+            color={
+              theme !== 'dark' ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.25)'
+            }
+            size={48}
+            style={{
+              position: 'absolute',
+              zIndex: 1,
+              top: '12%',
+              left: '-0.5%',
+            }}
+          />
+          <Ionicons
+            name="chevron-forward"
+            color={
+              theme !== 'dark' ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.25)'
+            }
+            size={48}
+            style={{
+              position: 'absolute',
+              zIndex: 1,
+              top: '12.5%',
+              right: '-0.5%',
+            }}
+          />
+        </>
+      )}
+      <Ionicons
+        name="chevron-back"
+        color={theme !== 'dark' ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.25)'}
+        size={48}
+        style={{
+          position: 'absolute',
+          zIndex: 1,
+          bottom: user[likedRole].length ? '30%' : '54%',
+          left: '-0.5%',
+        }}
+      />
+      <Ionicons
+        name="chevron-forward"
+        color={theme !== 'dark' ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.25)'}
+        size={48}
+        style={{
+          position: 'absolute',
+          zIndex: 1,
+          bottom: user[likedRole].length ? '30%' : '54%',
+          right: '-0.5%',
+        }}
+      />
       {matches.length || user[likedRole].length ? (
         <SafeAreaView style={{ ...styles.container, backgroundColor: mode.bg }}>
           {user[likedRole].length ? (
@@ -197,7 +255,11 @@ export default function Matcher() {
                 keyExtractor={(match, index) => match._id + index}
                 renderItem={({ item }) => (
                   <UserBlock
-                    enableTooltip={user[likedRole].length === 1}
+                    enableTooltip={
+                      user[likedRole].length === 1 &&
+                      !user.mentor?._id &&
+                      !user.mentees.length
+                    }
                     user={item}
                     userLogin={user}
                     handleLike={handleLike}
@@ -208,11 +270,11 @@ export default function Matcher() {
               />
             </View>
           ) : null}
-          {!user[likedRole].length && <View style={{ height: 120 }} />}
+          {!user[likedRole].length && <View style={styles.fakeHeight} />}
           {matches.length ? (
             <View style={styles.subContainer}>
               <Text style={{ ...styles.optionsTxt, color: mode.text }}>
-                Estas son tus opciones
+                Estas son tus opciones, deslizá a los costados
               </Text>
               <FlatList
                 horizontal

@@ -107,7 +107,7 @@ export default () => {
                       text="Notas"
                     />
                     <MenuOption
-                      onSelect={() => console.log('Reuniones')}
+                      onSelect={() => navigation.navigate('Meets', { mentee })}
                       text="Reuniones"
                     />
                     <MenuOption

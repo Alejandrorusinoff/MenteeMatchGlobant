@@ -4,6 +4,7 @@ import { globantBright } from '../../assets/styles/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#333333"
   },
 
   user_data_container: {
@@ -12,7 +13,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
     marginBottom: 10,
-
   },
 
   foto: {
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 62.5,
     borderWidth: 3,
-    borderColor: globantBright.violet
+    borderColor: '#00A99D',
   },
 
   text: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 
   flatContainer: {
-    flex:1,
+    flex: 1,
     flexDirection: 'row',
     position: 'relative',
     borderColor: globantBright.blackPearl,
@@ -42,22 +42,20 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 40,
   },
-    
+
   touchButton: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 20,
-    margin:5,
+    margin: 5,
   },
-  
+
   textName: {
     fontSize: 20,
-    margin:5,
-    color: globantBright.violet,
-    fontWeight: 'bold'
-  }
-
-
+    margin: 5,
+    color: '#00A99D',
+    fontWeight: 'bold',
+  },
 });
 
 export default styles;

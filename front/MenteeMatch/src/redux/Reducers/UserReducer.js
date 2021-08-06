@@ -8,6 +8,10 @@ import {
   registerUser,
   userLogin,
   updateUserData,
+  getMeets,
+  createMeet,
+  updateMeet,
+  deleteMeet
 } from '../../services/reduxServices';
 
 import { deleteMatch, deleteMatchMentor } from '../../services/axiosServices';
@@ -58,7 +62,7 @@ export const updateUser = createAsyncThunk(
 
 export const cancelMatch = createAsyncThunk(
   'CANCEL_MATCH',
-  async ({ data, token }, thunkAPI) => {
+  async ({ data, token }) => {
     try {
       const userUpdated = await deleteMatch(data, token);
       userUpdated.token = token;
@@ -71,7 +75,7 @@ export const cancelMatch = createAsyncThunk(
 
 export const cancelMatchMentor = createAsyncThunk(
   'CANCEL_MATCH_MENTOR',
-  async ({ data, token }, thunkAPI) => {
+  async ({ data, token }) => {
     try {
       const userUpdatedMentee = await deleteMatchMentor(data, token);
       userUpdatedMentee.token = token;
@@ -96,14 +100,25 @@ export const deleteNotification = createAsyncThunk(
   },
 );
 
+export const pullMeets = createAsyncThunk('PULL_MEETS', getMeets);
+export const pushMeet = createAsyncThunk('PUSH_MEET', createMeet);
+export const reloadMeet = createAsyncThunk('RELOAD_MEET', updateMeet);
+export const removeMeet = createAsyncThunk('REMOVE_MEET', deleteMeet);
+
+
 const userReducer = createReducer(initialState, {
   [getUser.fulfilled]: (_, action) => action.payload,
   [setUser]: (_, action) => action.payload,
   [userRegister.fulfilled]: (_, action) => action.payload,
   [updateUser.fulfilled]: (_, action) => action.payload,
   [cancelMatch.fulfilled]: (_, action) => action.payload,
-  [cancelMatchMentor.fulfilled]: (state, action) => state,
+  [cancelMatchMentor.fulfilled]: (state, _) => state,
   [deleteNotification.fulfilled]: (_, action) => action.payload,
+  [pullMeets.fulfilled]: (state, action) => {state.meets = action.payload},
+  [pushMeet.fulfilled]: (state, action) => {state.meets = [...state.meets, action.payload]},
+  [reloadMeet.fulfilled]: (state, action) => state,
+  [removeMeet.fulfilled]: (state, action) => 
+    {state.meets = state.meets.filter(meet => meet._id !== action.meta.arg._id)}
 });
 
 export default userReducer;

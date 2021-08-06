@@ -89,6 +89,18 @@ const Item = ({
             show={show}
             onRequestClose={toggle}
             theme="danger"
+            titleStyle={{
+              color: mode.text,
+            }}
+            subtitleStyle={{
+              color: mode.text,
+            }}
+            innerStyle={{
+              backgroundColor: mode.bg,
+            }}
+            headerContainerStyles={{
+              backgroundColor: mode.bg,
+            }}
             title="Atencion!"
             subtitle="Estas por eliminar un objetivo"
             headerIconComponent={

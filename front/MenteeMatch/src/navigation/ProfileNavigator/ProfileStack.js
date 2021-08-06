@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { UserDetails } from '../../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Camera } from '../../components';
-import RoleButton from '../../components/RoleButton';
+import { StyleSheet } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -29,18 +29,10 @@ export default function ProfileStack({ navigation }) {
               name="settings"
               size={30}
               color={'#F5F6F7'}
-              style={{ marginRight: 15 }}
+              style={styles.margin}
               onPress={() => navigation.openDrawer()}
             />
           ),
-          /* headerLeft: () => <RoleButton style={{
-            alignSelf: "center",
-            width: 140,
-            height: 45.6,
-            marginLeft: 8,
-            marginBottom: 20,
-            elevation: 5,
-          }} /> */
         }}
       />
       <Stack.Screen
@@ -51,3 +43,7 @@ export default function ProfileStack({ navigation }) {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  margin: { marginRight: 15 },
+});

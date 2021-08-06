@@ -8,14 +8,10 @@ const meetSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  mentor: {
+  participants: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
-  },
-  mentee: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Users",
-  },
+  }],
   link: {
     type: String,
   },
@@ -25,9 +21,9 @@ const meetSchema = new mongoose.Schema({
   },
 });
 
-meetSchema.virtual('isActive').get(() => {
-  return (this.date - Date() > 0)
-})
+// meetSchema.virtual('isActive').get(() => {
+//   return (this.date - Date.now() > 0)
+// })
 
 const Meets = mongoose.model("Meets", meetSchema);
 

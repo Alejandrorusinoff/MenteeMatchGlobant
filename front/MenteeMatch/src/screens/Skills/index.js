@@ -13,7 +13,7 @@ import Button from '../../components/Button';
 import { getSkills } from '../../redux/Reducers/Skills';
 import { simpleMessage } from '../../utils';
 import styles from './styles';
-import { updateUser, setUser } from '../../redux/Reducers/UserReducer';
+import { updateUser } from '../../redux/Reducers/UserReducer';
 import useMode from '../../hooks/useMode';
 import { storeData } from '../../utils/storage';
 
@@ -21,7 +21,7 @@ const Skills = ({ route, navigation }) => {
   const learnOrTeach = route.params.learnOrTeach;
   const property = route.params.property;
   const dispatch = useDispatch();
-  const { user, skills } = useSelector(state => state);
+  const { skills } = useSelector(state => state);
   const [buttonsStyle, setButtonsStyle] = useState({});
   const [selection, setSelection] = useState([]);
   const [menteesQty, setMenteesQty] = useState(1);
@@ -44,7 +44,7 @@ const Skills = ({ route, navigation }) => {
         url: `/api/users/skills/${learnOrTeach}`,
         data: { [property]: selection, maxMentees: menteesQty },
       }),
-    ).then((data) => {
+    ).then(data => {
       navigation.navigate('Role');
       setSelection([]);
       setButtonsStyle({});
@@ -55,7 +55,7 @@ const Skills = ({ route, navigation }) => {
         25,
         50,
       );
-      storeData('user', data.payload)
+      storeData('user', data.payload);
     });
     setSelection([]);
     setButtonsStyle({});
@@ -77,6 +77,7 @@ const Skills = ({ route, navigation }) => {
     const selectedSkills = Object.values(buttonsStyle);
     const finalSkillsIds = selectedSkills.map(skill => ({ _id: skill._id }));
     setSelection(finalSkillsIds);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Object.keys(buttonsStyle).length]);
 
   const handleChangeQty = number => {

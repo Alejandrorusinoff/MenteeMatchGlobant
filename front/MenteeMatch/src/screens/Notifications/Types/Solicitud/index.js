@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import useMode from '../../../../hooks/useMode';
 import useAlert from '../../../../hooks/useAlert';
-import userImg from '../../../../assets/static/user_img.png'
+import userImg from '../../../../assets/static/user_img.png';
 import { Alert } from '../../../../components';
 import {
   sendNotification,

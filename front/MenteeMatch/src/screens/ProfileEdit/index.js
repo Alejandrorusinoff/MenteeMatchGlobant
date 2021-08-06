@@ -117,7 +117,7 @@ const ProfileEdit = ({ navigation }) => {
   const sheetRef = React.useRef(null);
 
   return (
-    <SafeAreaView style={{...styles.mainContainer, backgroundColor: mode.bg}}>
+    <SafeAreaView style={{ ...styles.mainContainer, backgroundColor: mode.bg }}>
       <BottomSheet
         ref={sheetRef}
         snapPoints={[300, 200, 0]}
@@ -130,7 +130,6 @@ const ProfileEdit = ({ navigation }) => {
         contentContainerStyle={{
           ...styles.container,
           backgroundColor: mode.bg,
-          height: '100%',
         }}>
         <View style={styles.pressableFoto}>
           <TouchableOpacity
@@ -146,169 +145,175 @@ const ProfileEdit = ({ navigation }) => {
             )}
           </TouchableOpacity>
         </View>
-        <View style={{...styles.action, borderBottomColor: mode.green}}>
-            <Ionicons
-              name="person"
-              size={25}
-              color={'#BFD732'}
-            />
-            <Controller
-                control={control}
-                rules={{ required: false}}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Nombre..."
-                        placeholderTextColor="#666666"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                        autoCorrect={false}
-                        style={{ ...styles.textInput, color: mode.text  }}
-                    />
+        <View style={{ ...styles.action, borderBottomColor: mode.green }}>
+          <Ionicons name="person" size={25} color={'#BFD732'} />
+          <Controller
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                placeholder="Nombre..."
+                placeholderTextColor="#666666"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                autoCorrect={false}
+                style={{ ...styles.textInput, color: mode.text }}
+              />
+            )}
+            name="name"
+            defaultValue={user.name ? user.name : ''}
+          />
+            {errors.name && (
+                ToastAndroid.showWithGravityAndOffset(
+                  'el nombre no puede ser vacio',
+                  ToastAndroid.SHORT,
+                  ToastAndroid.BOTTOM,
+                  25,
+                  50,
+                ) 
+            )}
+          <Controller
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                placeholder="Apellido..."
+                placeholderTextColor="#666666"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                autoCorrect={false}
+                style={{ ...styles.textInput, color: mode.text }}
+              />
+            )}
+            name="surname"
+            defaultValue={user.surname ? user.surname : ''}
+          />
+            {errors.surname&& (
+                ToastAndroid.showWithGravityAndOffset(
+                  'el apellido no puede ser vacio',
+                  ToastAndroid.SHORT,
+                  ToastAndroid.BOTTOM,
+                  25,
+                  50,
+                ) 
+            )}
 
-                )}
-                name="name"
-                defaultValue={user.name ? user.name : ''}
-            />
-            <Controller
-                control={control}
-                rules={{ required: false}}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Apellido..."
-                        placeholderTextColor="#666666"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                        autoCorrect={false}
-                        style={{ ...styles.textInput, color: mode.text  }}
-                    />
-                )}
-                name="surname"
-                defaultValue={user.surname ? user.surname : ''}
+        </View>
+
+        <View style={{ ...styles.action, borderBottomColor: mode.green }}>
+          <Ionicons name="mail" size={25} color={'#BFD732'} />
+          <Controller
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                placeholder="Email..."
+                placeholderTextColor="#666666"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                autoCorrect={false}
+                style={{ ...styles.textInput, color: mode.text }}
+              />
+            )}
+            name="email"
+            defaultValue={user.email ? user.email : ''}
+          />
+            {errors.email && (
+                ToastAndroid.showWithGravityAndOffset(
+                  'el email no puede ser vacio',
+                  ToastAndroid.SHORT,
+                  ToastAndroid.BOTTOM,
+                  25,
+                  50,
+                ) 
+            )}
+
+        </View>
+        <View style={{ ...styles.action, borderBottomColor: mode.green }}>
+          <Ionicons name="briefcase" size={25} color={'#BFD732'} />
+          <Controller
+            control={control}
+            rules={{ required: false }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                placeholder="Posicion..."
+                placeholderTextColor="#666666"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                autoCorrect={false}
+                style={{ ...styles.textInput, color: mode.text }}
+              />
+            )}
+            name="position"
+            defaultValue={user.position ? user.position : ''}
           />
         </View>
-
-        <View style={{...styles.action, borderBottomColor: mode.green}}>
-            <Ionicons
-                name="mail"
-                size={25}
-                color={'#BFD732'}
-            />
-            <Controller
-                control={control}
-                rules={{ required: false}}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Email..."
-                        placeholderTextColor="#666666"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                        autoCorrect={false}
-                        style={{ ...styles.textInput, color: mode.text  }}
-                    />
-                )}
-                name="email"
-                defaultValue={user.email ? user.email : ''}
-            />
+        <View style={{ ...styles.action, borderBottomColor: mode.green }}>
+          <Ionicons name="call" size={25} color={'#BFD732'} />
+          <Controller
+            control={control}
+            rules={{ required: false }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                placeholder="Teléfono..."
+                placeholderTextColor="#666666"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                autoCorrect={false}
+                style={{ ...styles.textInput, color: mode.text }}
+              />
+            )}
+            name="phone"
+            defaultValue={user.phone ? user.phone : ''}
+          />
         </View>
-        <View style={{...styles.action, borderBottomColor: mode.green}}>
-            <Ionicons
-                name="briefcase"
-                size={25}
-                color={'#BFD732'}
-            />
-            <Controller
-                control={control}
-                rules={{ required: false}}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Posicion..."
-                        placeholderTextColor="#666666"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                        autoCorrect={false}
-                        style={{ ...styles.textInput, color: mode.text  }}
-                    />
-                )}
-                name="position"
-                defaultValue={user.position ? user.position : ''}
-            />
+        <View style={{ ...styles.action, borderBottomColor: mode.green }}>
+          <Ionicons name="location" size={25} color={'#BFD732'} />
+          <Controller
+            control={control}
+            rules={{ required: false }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                placeholder="Ubicacion..."
+                placeholderTextColor="#666666"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                autoCorrect={false}
+                style={{ ...styles.textInput, color: mode.text }}
+              />
+            )}
+            name="country"
+            defaultValue={user.country ? user.country : ''}
+          />
         </View>
-        <View style={{...styles.action, borderBottomColor: mode.green}}>
-            <Ionicons
-                name="call"
-                size={25}
-                color={'#BFD732'}
-            />
-            <Controller
-                control={control}
-                rules={{ required: false}}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Teléfono..."
-                        placeholderTextColor="#666666"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                        autoCorrect={false}
-                        style={{ ...styles.textInput, color: mode.text  }}
-                    />
-                )}
-                name="phone"
-                defaultValue={user.phone ? user.phone : ''}
-            />
-        </View>
-        <View style={{...styles.action, borderBottomColor: mode.green}}>
-            <Ionicons
-                name="location"
-                size={25}
-                color={'#BFD732'}
-            />
-            <Controller
-                control={control}
-                rules={{ required: false}}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Ubicacion..."
-                        placeholderTextColor="#666666"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                        autoCorrect={false}
-                        style={{ ...styles.textInput, color: mode.text  }}
-                    />
-                )}
-                name="country"
-                defaultValue={user.country? user.country : ''}
-            />
-        </View>
-        <View style={{...styles.action, borderBottomColor: mode.green}}>
-            <Ionicons
-                name="create"
-                size={25}
-                color={'#BFD732'}
-            />
-            <Controller
-                control={control}
-                rules={{ required: false}}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Acerca de mí..."
-                        placeholderTextColor="#666666"
-                        autoCorrect={false}
-                        errors={errors.personalDescription}
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                        style={{ ...styles.textInput, color: mode.text  }}
-                    />
-                )}
-                name="personalDescription"
-                defaultValue={user.personalDescription ? user.personalDescription : ''}
-            />
+        <View style={{ ...styles.action, borderBottomColor: mode.green }}>
+          <Ionicons name="create" size={25} color={'#BFD732'} />
+          <Controller
+            control={control}
+            rules={{ required: false }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                placeholder="Acerca de mí..."
+                placeholderTextColor="#666666"
+                autoCorrect={false}
+                errors={errors.personalDescription}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+                style={{ ...styles.textInput, color: mode.text }}
+              />
+            )}
+            name="personalDescription"
+            defaultValue={
+              user.personalDescription ? user.personalDescription : ''
+            }
+          />
         </View>
         <TouchableOpacity
           style={styles.button}

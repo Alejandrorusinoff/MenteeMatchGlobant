@@ -12,6 +12,7 @@ import NotificationsStack from '../NotificationsNavigator';
 const Tab = createBottomTabNavigator();
 
 export default function HomeApp() {
+  const notifications = useSelector(state => state.user.notifications)
   const { mode } = useMode();
   const user = useSelector(state => state.user);
   return (
@@ -52,6 +53,7 @@ export default function HomeApp() {
             <Ionicons name="notifications-circle" size={size} color={color} />
           ),
           unmountOnBlur: true,
+          tabBarBadge: notifications.length ? notifications.length : null
         }}
       />
       <Tab.Screen

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useMode from '../../hooks/useMode';
@@ -18,6 +18,7 @@ const Notifications = () => {
 
   useEffect(() => {
     dispatch(updateUser({ url, data: {} }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRenderItem = ({ item }) => {
@@ -32,7 +33,25 @@ const Notifications = () => {
     dispatch(updateUser({ url, data: {} }));
   };
 
-  return (
+  return !user.notifications.length ? (
+    <View style={{...styles.buttonContainer, backgroundColor: mode.bg}}>
+      <Text
+        style={{
+          flex: 0.889,
+          textAlign: "center",
+          textAlignVertical: "center",
+          fontSize: 28,
+          color: mode.text
+        }}>
+        No tienes notificaciones actualmente.
+      </Text>
+      <Button
+        title="Recargar"
+        pressFunction={handleReloadNotifications}
+        style={styles.button}
+      />
+  </View>
+  ) : (
     <View style={{ ...styles.mainContainer, backgroundColor: mode.bg }}>
       <View style={styles.flatListContainer}>
         <FlatList

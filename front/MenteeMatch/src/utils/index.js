@@ -15,7 +15,6 @@ export const simpleMessage = (message, description, type) => {
     message: message,
     description: description,
     type: type,
-    // animationDuration: 1000,
     icon: type,
     floating: true,
   });

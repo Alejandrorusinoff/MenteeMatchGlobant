@@ -7,7 +7,7 @@ import useMode from '../../hooks/useMode';
 
 const Stack = createStackNavigator();
 
-export default function MatchNav({ navigation }) {
+export default function MatchNav() {
   const { user } = useSelector(state => state);
   const { mode } = useMode();
   return (
@@ -17,9 +17,6 @@ export default function MatchNav({ navigation }) {
         headerTitle: () => <HeaderTitle user={user} mode={mode} />,
         headerStyle: { backgroundColor: '#BFD732' },
         headerTintColor: '#F5F6F7',
-        headerTitleStyle: {
-          /* fontWeight: 'bold', */
-        },
       }}>
       <Stack.Screen
         name="Matcher"

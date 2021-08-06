@@ -12,6 +12,8 @@ import Skills from './Skills';
 import Notifications from './Notifications';
 import ProfileEdit from './ProfileEdit';
 import MenteeDetails from './MenteeDetails';
+import Meets from './Meets';
+import CreateMeet from './CreateMeet'
 
 export {
   Matcher,
@@ -28,4 +30,6 @@ export {
   Notifications,
   ProfileEdit,
   MenteeDetails,
+  Meets,
+  CreateMeet,
 };

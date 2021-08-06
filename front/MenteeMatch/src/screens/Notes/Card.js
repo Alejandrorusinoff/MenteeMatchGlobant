@@ -29,13 +29,13 @@ export default function CardComponent({ mentee, functions, userToken, notes }) {
           }}>{`${mentee.name} ${mentee.surname}`}</Card.Title>
 
         <Input
-          style={{color: mode.text}}
+          style={{ color: mode.text }}
           placeholder="Titulo..."
           leftIcon={<Icon name="edit" size={20} color="black" />}
           onChangeText={settitle}
         />
         <Input
-          style={{color: mode.text}}
+          style={{ color: mode.text }}
           placeholder="Nota..."
           leftIcon={<Icon name="edit" size={20} color="black" />}
           onChangeText={setnote}
@@ -63,11 +63,7 @@ export default function CardComponent({ mentee, functions, userToken, notes }) {
                 - {u.description}
               </Text>
               <Card.Divider />
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                }}>
+              <View style={styles.direction}>
                 <Button
                   icon={<Icon name="edit" color="#ffffff" />}
                   buttonStyle={{ ...styles.btns, backgroundColor: mode.green }}
@@ -124,5 +120,9 @@ const styles = StyleSheet.create({
   },
   btns: {
     width: 100,
+  },
+  direction: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });

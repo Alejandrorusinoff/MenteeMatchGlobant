@@ -6,6 +6,7 @@ const generateAxios = token => {
   });
 
   // Config de headers de axios para pedidos con autenticación
+  // eslint-disable-next-line dot-notation
   axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
   return axiosInstance;

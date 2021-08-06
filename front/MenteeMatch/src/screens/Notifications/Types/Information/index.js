@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import useMode from '../../../../hooks/useMode';
 import { deleteNotification } from '../../../../redux/Reducers/UserReducer';
-import userImg from '../../../../assets/static/user_img.png'
+import userImg from '../../../../assets/static/user_img.png';
 import styles from '../styles';
 
 const Information = ({ item }) => {
@@ -28,7 +28,9 @@ const Information = ({ item }) => {
       return `Has invitado a ${emisor.name} ${emisor.surname} a ser tu mentee`;
     } else if (item.type === 'congratulations') {
       return `¡Felicitaciones!. Has seleccionado a ${emisor.name} ${emisor.surname} cómo tu mentor`;
-    }
+    } else if (item.type === 'reunion') {
+      return `Tu mentor ${emisor.name} ${emisor.surname} ha creado una nueva reunión`;
+    } 
   };
   return (
     <View

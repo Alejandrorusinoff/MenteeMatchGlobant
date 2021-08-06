@@ -8,27 +8,27 @@ router.get('/', async (req, res, next) => {
         const { id } = req.user
         const user = await Users.findById(id).exec()
         if(!user) res.status(400).send('Bad request: no user found')
-
-        let meets = []
-        if(user.isMentee) meets = [...meets, await Meets.find({ mentee: user })]
-        if(user.isMentor) meets = [...meets, await Meets.find({ mentor: user })]
-        if(!meets) res.status(404).status('Not Found: no meets found')
+        const meets = await Meets.find({ participants: user })
+        if(!meets) res.status(404).json({})
         res.status(200).json(meets)
     } catch(err) { next(err) }
 })
 
 router.post('/', async (req, res, next) => {
     try {
-        const { title, description, mentor, mentee, link, date } = req.body
-        if(!date || !title || (!mentor && !mentee)) res.status(400).send('Bad request: invalid inputs')
-        const meet = await Meets.create({ title, description, mentor, mentee, link, date })
+        const { title, description, participants, link, date } = req.body
+        console.log("REQ BODY =====>>>>>", req.body)
+        if(!date || !title || (!participants.length)) res.status(400).send('Bad request: invalid inputs')
+        const meet = await Meets.create({ title, description, participants, link, date })
+        await Promise.all(participants.map(p => 
+            Users.findOneAndUpdate( { _id: p } , { $push: { meets: meet._id } }, { new: true })))
         res.status(200).send(meet)
     } catch(err) { next(err) }
 })
 
 router.put('/', async (req, res, next) => {
     try {
-        //Le paso el _id de la reunion. (hay alguna mejor forma de implementarlo?)
+        //Le paso el _id de la reunion
         const { _id } = req.body
         if(!_id) res.status(400).send('Bad request: no meet passed by')
         const meet = await Meets.findOneAndUpdate(_id, req.body, { new: true }).exec()
@@ -37,11 +37,15 @@ router.put('/', async (req, res, next) => {
     } catch(err) { next(err) }
 })
 
-router.delete('/', async (req, res, next) => {
+router.delete('/:_id', async (req, res, next) => {
     try {
-        const { _id } = req.body
+        const { _id } = req.params
         if(!_id) res.status(400).send('Bad request: no meet passed by')
-        await Meets.findOneAndDelete(_id).exec()
+        const meet = await Meets.findOne({_id}).exec()
+        const participants = meet.participants
+        await Promise.all(participants.map(p => 
+            Users.findOneAndUpdate( { _id: p } , { $pull: { meets: _id } }, { new: true })))
+        await meet.delete()
         res.status(201).send('Meet deleted')
     } catch(err) { next(err) }
 })

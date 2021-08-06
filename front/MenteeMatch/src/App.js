@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import FlashMessage from 'react-native-flash-message';
 import store from './redux/store';
+import { Appearance } from 'react-native';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -24,6 +25,7 @@ const AppWrapper = () => (
 const App = () => {
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  const colorScheme = Appearance.getColorScheme();
 
   useEffect(() => {
     const checkIfStoragedUser = async () => {
@@ -34,7 +36,7 @@ const App = () => {
         ]);
         user && dispatch(setUser(user));
         user && dispatch(restoreToken({ token: user.token }));
-        theme && dispatch(setReduxTheme(theme));
+        theme && dispatch(setReduxTheme(theme || colorScheme));
       } catch (e) {
         console.log(e);
       }
@@ -44,9 +46,8 @@ const App = () => {
   }, [auth.userToken]);
 
   /* Vieja forma de deshabilitar logs amarillos -> console.disableYellowBox = true; */
-  
-  useEffect(() => LogBox.ignoreAllLogs(), []);
 
+  useEffect(() => LogBox.ignoreAllLogs(), []);
 
   return (
     <Provider store={store}>

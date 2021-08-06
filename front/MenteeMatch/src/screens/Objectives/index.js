@@ -23,6 +23,7 @@ const Objectives = ({ route }) => {
     };
 
     init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   const handleAdd = async objective => {
@@ -40,11 +41,17 @@ const Objectives = ({ route }) => {
 
   const handleDelete = async objetiveId => {
     const res = await deleteObjectivesToUser(mentee._id, userToken, objetiveId);
-    if (res) setstate(!state);
+    if (res) {
+      setstate(!state);
+    }
   };
 
-  const handleEdit = async (objectiveId, data) => {
-    const res = await updateObjectivesToUser(userToken, objectiveId, data);
+  const handleEdit = async (objectiveId, dataInside) => {
+    const res = await updateObjectivesToUser(
+      userToken,
+      objectiveId,
+      dataInside,
+    );
     if (res) {
       simpleMessage(
         'Objetivo editado',

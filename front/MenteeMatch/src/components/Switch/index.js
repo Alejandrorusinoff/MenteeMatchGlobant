@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Switch, StyleSheet, Text } from 'react-native';
 import useMode from '../../hooks/useMode';
 import useTheme from '../../hooks/useTheme';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 const SwitchDarkMode = () => {
   const { isEnabled, toggleSwitch } = useTheme();
@@ -9,6 +11,7 @@ const SwitchDarkMode = () => {
 
   return (
     <View style={styles.container}>
+      {isEnabled ? <Ionicons name="moon" size={24} /> : <Ionicons name="sunny" size={24} />}
       <Text style={{ ...styles.title, color: mode.text }}>Modo oscuro</Text>
       <Switch
         style={styles.switch}
@@ -27,15 +30,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     display: 'flex',
     flexDirection: 'row',
+    alignItems: "center",
     justifyContent: 'space-between',
-  },
-  switch: {
-    marginTop: 20,
-    marginRight: 20,
-  },
-  title: {
-    marginTop: 20,
-    marginLeft: 20,
+    padding: 20
   },
 });
 
